@@ -12,8 +12,11 @@ class Translator {
     let translation = text;
     let translationObjects = [americanOnly, americanToBritishSpelling, americanToBritishTitles];
 
+    translation = translation.replace(/([0-9]):([0-9])/, '<span class="highlight">$1.$2</span>');
+
     if (locale === "british-to-american") {
       translationObjects = [britishOnly, britishToAmericanSpelling, britishToAmericanTitles];
+      translation = translation.replace(/([0-9]).([0-9])/, '<span class="highlight">$1:$2</span>');
     }
 
     for (const object of translationObjects) {
