@@ -3,8 +3,9 @@ const americanToBritishSpelling = require('./american-to-british-spelling.js');
 const americanToBritishTitles = require("./american-to-british-titles.js")
 const britishOnly = require('./british-only.js')
 
-const britishToAmericanSpelling = {foo: "foo"};
-const britishToAmericanTitles = {foo: "foo"};
+const britishToAmericanSpelling = keyValueStringSwap(americanToBritishSpelling);
+const britishToAmericanTitles = keyValueStringSwap(americanToBritishTitles);
+
 
 class Translator {
   translate(text, locale) {
@@ -27,3 +28,15 @@ class Translator {
 }
 
 module.exports = Translator;
+
+//------------------------------------
+
+function keyValueStringSwap(object) {
+  const newObject = {};
+
+  for (const key in object) {
+    newObject[object[key]] = key;
+  }
+
+  return newObject;
+}
