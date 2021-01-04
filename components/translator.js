@@ -18,7 +18,7 @@ class Translator {
 
     for (const object of translationObjects) {
       for (const key in object) {
-        const regex = new RegExp(key, "g");
+        const regex = new RegExp(key, "gi");
         translation = translation.replace(regex, '<span class="highlight">' + object[key] + '</span>');
       }
     }
