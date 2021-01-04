@@ -6,17 +6,18 @@ const britishOnly = require('./british-only.js')
 const britishToAmericanSpelling = keyValueStringSwap(americanToBritishSpelling);
 const britishToAmericanTitles = keyValueStringSwap(americanToBritishTitles);
 
-
 class Translator {
   translate(text, locale) {
     let translation = text;
-    let translationObjects = [americanOnly, americanToBritishSpelling, americanToBritishTitles];
-
-    translation = translation.replace(/([0-9]):([0-9])/, '<span class="highlight">$1.$2</span>');
-
-    if (locale === "british-to-american") {
+    let translationObjects;
+    
+    if (locale === "american-to-british") {
+      translationObjects = [americanOnly, americanToBritishSpelling, americanToBritishTitles];
+      translation = translation.replace(/([0-9]{1,2}):([0-9]{1,2})/, '<span class="highlight">$1.$2</span>');
+    }
+    else {
       translationObjects = [britishOnly, britishToAmericanSpelling, britishToAmericanTitles];
-      translation = translation.replace(/([0-9]).([0-9])/, '<span class="highlight">$1:$2</span>');
+      translation = translation.replace(/([0-9]{1,2}).([0-9]{1,2})/, '<span class="highlight">$1:$2</span>');
     }
 
     for (const object of translationObjects) {
