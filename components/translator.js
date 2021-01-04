@@ -29,6 +29,20 @@ class Translator {
     
     return translation;
   }
+
+  highlightTranslation (text, locale) {
+    let translation = text;
+    let translationObjects;
+    
+    if (locale === "american-to-british") {
+      translationObjects = [americanOnly, americanToBritishSpelling, americanToBritishTitles];
+      translation = translation.replace(/([0-9]{1,2}):([0-9]{1,2})/, '<span class="highlight">$1.$2</span>');
+    }
+    else {
+      translationObjects = [britishOnly, britishToAmericanSpelling, britishToAmericanTitles];
+      translation = translation.replace(/([0-9]{1,2}).([0-9]{1,2})/, '<span class="highlight">$1:$2</span>');
+    }
+  }
 }
 
 module.exports = Translator;

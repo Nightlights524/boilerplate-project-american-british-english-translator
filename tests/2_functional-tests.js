@@ -5,13 +5,13 @@ const server = require('../server.js');
 
 chai.use(chaiHttp);
 
-let Translator = require('../components/translator.js');
+// let Translator = require('../components/translator.js');
 
 suite('Functional Tests', () => {
 
   test('Translation with text and locale fields', done => {
     const text = 'Mangoes are my favorite fruit.';
-    const translation = 'Mangoes are my <span class=\"highlight\">favourite</span> fruit.';
+    const translation = 'Mangoes are my <span class="highlight">favourite</span> fruit.';
     const locale = 'american-to-british';
     chai.request(server)
       .post('/api/translate')
