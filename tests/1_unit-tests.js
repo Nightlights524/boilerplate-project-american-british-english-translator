@@ -100,7 +100,7 @@ suite('Unit Tests', () => {
   test('Translate I spent the bank holiday at the funfair.', done => {
     const text = 'I spent the bank holiday at the funfair.';
     const translation = translator.translate(text, 'british-to-american');
-    assert.equal(translation, 'I spent the bank holiday at the carnival.');
+    assert.equal(translation, 'I spent the public holiday at the carnival.');
     done();
   });
 
