@@ -7,7 +7,7 @@ chai.use(chaiHttp);
 
 // let Translator = require('../components/translator.js');
 
-suite('Functional Tests', () => {
+suite('Functional Tests ->', () => {
 
   test('Translation with text and locale fields', done => {
     const text = 'Mangoes are my favorite fruit.';
