@@ -13,11 +13,13 @@ class Translator {
     let titles;
     
     if (locale === "american-to-british") {
+      // translationObjects = [americanOnly, americanToBritishSpelling, americanToBritishTitles];
       translationObjects = [americanOnly, americanToBritishSpelling];
       titles = americanToBritishTitles;
       translation = translation.replace(/([0-9]{1,2}):([0-9]{1,2})/, '$1.$2');
     }
     else if (locale === "british-to-american")  {
+      // translationObjects = [britishOnly, britishToAmericanSpelling, britishToAmericanTitles];
       translationObjects = [britishOnly, britishToAmericanSpelling];
       titles = britishToAmericanTitles;
       translation = translation.replace(/([0-9]{1,2}).([0-9]{1,2})/, '$1:$2');
@@ -29,11 +31,12 @@ class Translator {
     for (const object of translationObjects) {
       for (const key in object) {
         const testRegex = new RegExp(`\\b${key}\\b`, "gi");
-        const keyRegex = new RegExp(`${key}`, 'gi');
-        const replacement = highlight ? this.highlight(object[key]) : object[key];
+        const keyRegex = new RegExp(`(?<!~)${key}(?!~)`, 'gi');
+        let replacement = `~${object[key]}~`;
+        replacement = highlight ? this.highlight(replacement) : replacement;
 
         if (testRegex.test(translation)) {
-          translation = translation.replace(keyRegex, `~${replacement}~`);
+          translation = translation.replace(keyRegex, replacement);
         }
       }
     }
@@ -41,9 +44,10 @@ class Translator {
     for (const key in titles) {
       const regexString = locale === 'american-to-british' ? `${key}` : `\\b${key}\\b`;
       const titleRegex = new RegExp(regexString, 'gi');
-      const replacement = highlight ? this.highlight(titles[key]) : titles[key];
+      let replacement = `~${titles[key]}~`;
+      replacement = highlight ? this.highlight(replacement) : replacement;
 
-      translation = translation.replace(titleRegex, `~${replacement}~`);
+      translation = translation.replace(titleRegex, replacement);
     }
 
     translation = translation.replace(/~/g, '');
