@@ -16,13 +16,15 @@ class Translator {
       // translationObjects = [americanOnly, americanToBritishSpelling, americanToBritishTitles];
       translationObjects = [americanOnly, americanToBritishSpelling];
       titles = americanToBritishTitles;
-      translation = translation.replace(/([0-9]{1,2}):([0-9]{1,2})/, '$1.$2');
+      const timeReplacement = highlight ? this.highlight('$1.$2') : '$1.$2';
+      translation = translation.replace(/([0-9]{1,2}):([0-9]{1,2})/, timeReplacement);
     }
     else if (locale === "british-to-american")  {
       // translationObjects = [britishOnly, britishToAmericanSpelling, britishToAmericanTitles];
       translationObjects = [britishOnly, britishToAmericanSpelling];
       titles = britishToAmericanTitles;
-      translation = translation.replace(/([0-9]{1,2}).([0-9]{1,2})/, '$1:$2');
+      const timeReplacement = highlight ? this.highlight('$1:$2') : '$1:$2';
+      translation = translation.replace(/([0-9]{1,2}).([0-9]{1,2})/, timeReplacement);
     }
     else {
       return "ERROR! INVALID LOCALE";
